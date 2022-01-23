@@ -1,9 +1,9 @@
-package com.mbprojects.springboot.app.models.dao;
+package com.mbprojects.springboot.app.models.service;
 
 import com.mbprojects.springboot.app.models.entity.Client;
 import java.util.List;
 
-public interface IClientDao {
+public interface IClientService {
 
   List<Client> findAll();
 

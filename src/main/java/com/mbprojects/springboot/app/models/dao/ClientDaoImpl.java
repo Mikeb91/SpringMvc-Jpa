@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository("clientDaoJpa") //Persistence Component with access to the DATA
 public class ClientDaoImpl implements IClientDao{
@@ -13,7 +12,6 @@ public class ClientDaoImpl implements IClientDao{
   @PersistenceContext
   private EntityManager em;
 
-  @Transactional(readOnly = true)
   @Override
   @SuppressWarnings("unchecked")
   public List<Client> findAll() {
@@ -21,9 +19,22 @@ public class ClientDaoImpl implements IClientDao{
   }
 
   @Override
-  @Transactional
+  public Client findOne(Long id) {
+    return em.find(Client.class, id);
+  }
+
+  @Override
   public void save(Client client) {
-    em.persist(client);
+    if(client.getId() != null && client.getId() > 0){
+      em.merge(client);
+    } else {
+      em.persist(client);
+    }
+  }
+
+  @Override
+  public void delete(Long id) {
+    em.remove(findOne(id));
   }
 
 }

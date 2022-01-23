@@ -26,7 +26,7 @@
 </nav>
 <div class="container">
   <h1 class="text-secondary" th:text="${title}"></h1>
-  <a th:href="@{/form}">Create Client</a>
+  <p><a th:href="@{/form}" class="btn btn-success btn-xs">Create Client</a></p>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -35,6 +35,8 @@
       <th>Last name</th>
       <th>email</th>
       <th>Create at</th>
+      <th>Edit</th>0
+      <th>Delete</th>0
     </tr>
     </thead>
     <tbody>
@@ -44,6 +46,8 @@
       <td th:text="${client.lastName}"></td>
       <td th:text="${client.email}"></td>
       <td th:text="${client.createAt}"></td>
+      <td ><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${client.id}" th:text="'Edit'"></a></td>
+      <td ><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${client.id}" th:text="'Delete'" onclick="return confirm('Are you sure you want to delete client?')"></a></td>
     </tr>
     </tbody>
   </table>
