@@ -2,8 +2,6 @@ package com.mbprojects.springboot.app.controllers;
 
 import com.mbprojects.springboot.app.models.entity.Client;
 import com.mbprojects.springboot.app.models.service.IClientService;
-import java.util.Map;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @SessionAttributes("client") //This is how we manage to persist client info without the hidden field "id" in form view

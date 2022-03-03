@@ -1,11 +1,12 @@
 package com.mbprojects.springboot.app.models.service;
 
-import com.mbprojects.springboot.app.models.dao.IClientDao;
+import com.mbprojects.springboot.app.models.dao.IClientDaoJpaRepository;
 import com.mbprojects.springboot.app.models.entity.Client;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * This class works as a Facade (Facade pattern). This is a single access point
@@ -15,8 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ClientServiceImpl implements IClientService {
 
+//  @Autowired
+//  private IClientDao clientDao;   //This is for the custom repository
+
   @Autowired
-  private IClientDao clientDao;
+  private IClientDaoJpaRepository clientDao;
 
   @Override
   @Transactional(readOnly = true)
@@ -27,7 +31,7 @@ public class ClientServiceImpl implements IClientService {
   @Override
   @Transactional(readOnly = true)
   public Client findOne(Long id) {
-    return clientDao.findOne(id);
+    return clientDao.findById(id).orElse(null);
   }
 
   @Override
@@ -39,6 +43,6 @@ public class ClientServiceImpl implements IClientService {
   @Override
   @Transactional
   public void delete(Long id) {
-    clientDao.delete(id);
+    clientDao.deleteById(id);
   }
 }
